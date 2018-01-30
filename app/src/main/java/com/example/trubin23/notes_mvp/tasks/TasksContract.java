@@ -1,4 +1,4 @@
-package com.example.trubin23.notes_mvp.Tasks;
+package com.example.trubin23.notes_mvp.tasks;
 
 import com.example.trubin23.notes_mvp.BasePresenter;
 import com.example.trubin23.notes_mvp.BaseView;

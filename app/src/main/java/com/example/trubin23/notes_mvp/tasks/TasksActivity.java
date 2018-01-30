@@ -1,4 +1,4 @@
-package com.example.trubin23.notes_mvp.Tasks;
+package com.example.trubin23.notes_mvp.tasks;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,5 +11,7 @@ public class TasksActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
+
+        new TasksPresenter();
     }
 }
