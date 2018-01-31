@@ -35,4 +35,24 @@ public final class Task {
         mDescription = description;
         mDateOfCreation = dateOfCreation;
     }
+
+    @NonNull
+    public String getId() {
+        return mId;
+    }
+
+    @NonNull
+    public String getTitle() {
+        return mTitle;
+    }
+
+    @NonNull
+    public String getDescription() {
+        return mDescription;
+    }
+
+    @NonNull
+    public String getDateOfCreation() {
+        return mDateOfCreation;
+    }
 }
