@@ -1,4 +1,4 @@
-package com.example.trubin23.notes_mvp;
+package com.example.trubin23.tasks_mvp;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

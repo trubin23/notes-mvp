@@ -1,4 +1,4 @@
-package com.example.trubin23.notes_mvp.tasks;
+package com.example.trubin23.tasks_mvp.tasks;
 
 import android.app.Fragment;
 

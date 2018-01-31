@@ -1,7 +1,7 @@
-package com.example.trubin23.notes_mvp.tasks;
+package com.example.trubin23.tasks_mvp.tasks;
 
-import com.example.trubin23.notes_mvp.BasePresenter;
-import com.example.trubin23.notes_mvp.BaseView;
+import com.example.trubin23.tasks_mvp.BasePresenter;
+import com.example.trubin23.tasks_mvp.BaseView;
 
 /**
  * Created by Andrey on 30.01.2018.
