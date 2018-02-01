@@ -14,22 +14,18 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     private static volatile TasksLocalDataSource INSTANCE;
 
-    private AppExecutors mAppExecutors;
-
     private TasksDao mTasksDao;
 
-    private TasksLocalDataSource(@NonNull AppExecutors appExecutors, @NonNull TasksDao tasksDao) {
-        mAppExecutors = appExecutors;
+    private TasksLocalDataSource(@NonNull TasksDao tasksDao) {
         mTasksDao = tasksDao;
     }
 
     @NonNull
-    public static TasksLocalDataSource getInstance(@NonNull AppExecutors appExecutors,
-                                                   @NonNull TasksDao tasksDao) {
+    public static TasksLocalDataSource getInstance(@NonNull TasksDao tasksDao) {
         if (INSTANCE == null) {
             synchronized (TasksLocalDataSource.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new TasksLocalDataSource(appExecutors, tasksDao);
+                    INSTANCE = new TasksLocalDataSource(tasksDao);
                 }
             }
         }
