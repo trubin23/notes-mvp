@@ -25,6 +25,7 @@ public class TasksRepository implements TasksDataSource {
         mTasksLocalDataSource = tasksLocalDataSource;
     }
 
+    @NonNull
     public static TasksRepository getInstance(@NonNull AppExecutors appExecutors,
                                               @NonNull TasksDataSource tasksLocalDataSource) {
         if (INSTANCE == null) {

@@ -4,7 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.example.trubin23.tasks_mvp.data.Task;
 import com.example.trubin23.tasks_mvp.data.source.TasksDataSource;
-import com.example.trubin23.tasks_mvp.util.AppExecutors;
+
+import java.util.List;
 
 /**
  * Created by Andrey on 01.02.2018.
@@ -34,21 +35,31 @@ public class TasksLocalDataSource implements TasksDataSource {
 
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
-
+        List<Task> tasks = mTasksDao.getTasks();
+        if (tasks.isEmpty()){
+            callback.onDataNotAvailable();
+        } else {
+            callback.onTasksLoaded(tasks);
+        }
     }
 
     @Override
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
-
+        Task task = mTasksDao.getTaskById(id);
+        if (task != null){
+            callback.onDataNotAvailable();
+        } else {
+            callback.onTaskLoaded(task);
+        }
     }
 
     @Override
     public void saveTask(@NonNull Task task) {
-
+        mTasksDao.insertTask(task);
     }
 
     @Override
     public void updateTask(@NonNull Task task) {
-
+        mTasksDao.updateTask(task);
     }
 }
