@@ -43,6 +43,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
         return mTasks.size();
     }
 
+    public void setTasks(@NonNull List<Task> tasks) {
+        mTasks = tasks;
+        notifyDataSetChanged();
+    }
+
     class TaskHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.title)
@@ -51,7 +56,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
         @BindView(R.id.description)
         TextView mDescriptionTV;
 
-        @BindView(R.id.title)
+        @BindView(R.id.date_of_create)
         TextView mDateOfCreateTV;
 
         TaskHolder(View itemView) {
