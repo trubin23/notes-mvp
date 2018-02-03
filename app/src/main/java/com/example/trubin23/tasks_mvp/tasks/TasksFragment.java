@@ -34,6 +34,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
 
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
+        recyclerView.setAdapter(mTasksAdapter);
 
         return root;
     }
