@@ -56,10 +56,10 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
     class TaskHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.title)
+        @BindView(R.id.task_detail_title)
         TextView mTitleTV;
 
-        @BindView(R.id.description)
+        @BindView(R.id.task_detail_description)
         TextView mDescriptionTV;
 
         TaskHolder(View itemView) {

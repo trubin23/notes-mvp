@@ -23,13 +23,13 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     private TaskDetailContract.Presenter mPresenter;
 
-    @BindView(R.id.title)
+    @BindView(R.id.task_detail_title)
     TextView mDetailTitle;
 
-    @BindView(R.id.description)
+    @BindView(R.id.task_detail_description)
     TextView mDetailDescription;
 
-    @BindView(R.id.date_of_create)
+    @BindView(R.id.task_detail_date)
     TextView mDetailDateOfCreate;
 
     @Nullable
