@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tasks-mvp</string>
+    <string name="no_data">No data</string>
 </resources>

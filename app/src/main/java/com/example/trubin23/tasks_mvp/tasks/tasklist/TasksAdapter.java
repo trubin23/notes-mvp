@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.trubin23.tasks_mvp.R;
 import com.example.trubin23.tasks_mvp.data.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -23,6 +24,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
     private List<Task> mTasks;
     private TaskItemListener mTaskItemListener;
+
+    public TasksAdapter(@NonNull TaskItemListener taskItemListener) {
+        mTaskItemListener = taskItemListener;
+        mTasks = new ArrayList<>();
+    }
 
     @Override
     public TasksAdapter.TaskHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -56,18 +62,14 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
         @BindView(R.id.description)
         TextView mDescriptionTV;
 
-        @BindView(R.id.date_of_create)
-        TextView mDateOfCreateTV;
-
         TaskHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
 
-        void setTask(@NonNull Task task){
+        void setTask(@NonNull Task task) {
             mTitleTV.setText(task.getTitle());
             mDescriptionTV.setText(task.getDescription());
-            mDateOfCreateTV.setText(task.getDateOfCreation());
         }
     }
 }

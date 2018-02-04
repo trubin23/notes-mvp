@@ -1,5 +1,6 @@
 package com.example.trubin23.tasks_mvp.tasks;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 
 import com.example.trubin23.tasks_mvp.R;
 import com.example.trubin23.tasks_mvp.data.Task;
+import com.example.trubin23.tasks_mvp.taskdetail.TaskDetailActivity;
+import com.example.trubin23.tasks_mvp.tasks.tasklist.TaskItemListener;
 import com.example.trubin23.tasks_mvp.tasks.tasklist.TasksAdapter;
 
 import java.util.List;
@@ -35,7 +38,9 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mTasksAdapter = new TasksAdapter();
+
+        TaskItemListener taskItemListener = clickedTask -> showTaskDetail(clickedTask.getId());
+        mTasksAdapter = new TasksAdapter(taskItemListener);
     }
 
     @Nullable
@@ -60,6 +65,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     @Override
     public void setPresenter(@NonNull TasksContract.Presenter presenter) {
         mPresenter = presenter;
+    }
+
+    private void showTaskDetail(String id) {
+        Intent intent = new Intent(getContext(), TaskDetailActivity.class);
+        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, id);
+        startActivity(intent);
     }
 
     @Override
