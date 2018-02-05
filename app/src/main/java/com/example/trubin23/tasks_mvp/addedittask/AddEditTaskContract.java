@@ -1,5 +1,7 @@
 package com.example.trubin23.tasks_mvp.addedittask;
 
+import android.support.annotation.NonNull;
+
 import com.example.trubin23.tasks_mvp.BasePresenter;
 import com.example.trubin23.tasks_mvp.BaseView;
 
@@ -10,6 +12,10 @@ import com.example.trubin23.tasks_mvp.BaseView;
 public interface AddEditTaskContract {
 
     interface View extends BaseView<Presenter>{
+
+        void setTitle(@NonNull String title);
+
+        void setDescription(@NonNull String description);
 
         void showEmptyTaskError();
     }

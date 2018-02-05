@@ -37,7 +37,7 @@ public class TasksPresenter implements TasksContract.Presenter {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
                 mTasksView.setLoadingIndicator(false);
-                mTasksView.showTask(tasks);
+                mTasksView.showTasks(tasks);
             }
 
             @Override
@@ -46,5 +46,10 @@ public class TasksPresenter implements TasksContract.Presenter {
                 mTasksView.setLoadingIndicator(false);
             }
         });
+    }
+
+    @Override
+    public void addNewTask() {
+
     }
 }

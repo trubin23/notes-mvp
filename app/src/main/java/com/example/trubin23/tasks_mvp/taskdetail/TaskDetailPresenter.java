@@ -47,7 +47,9 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
                 if (null == task) {
                     mTaskDetailView.showMissingTask();
                 } else {
-                    mTaskDetailView.showTask(task);
+                    mTaskDetailView.setTitle(task.getTitle());
+                    mTaskDetailView.setDescription(task.getDescription());
+                    mTaskDetailView.setDateOfCreate(task.getDateOfCreation());
                 }
             }
 

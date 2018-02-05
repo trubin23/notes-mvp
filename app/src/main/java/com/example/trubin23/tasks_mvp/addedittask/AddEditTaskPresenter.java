@@ -45,7 +45,8 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
         mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {
-
+                mAddTaskView.setTitle(task.getTitle());
+                mAddTaskView.setDescription(task.getDescription());
             }
 
             @Override

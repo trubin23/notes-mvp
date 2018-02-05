@@ -18,10 +18,13 @@ public interface TasksContract {
 
         void setLoadingIndicator(boolean active);
 
-        void showTask(@NonNull List<Task> tasks);
+        void showTasks(@NonNull List<Task> tasks);
+
+        void showAddTask();
     }
 
     interface Presenter extends BasePresenter {
 
+        void addNewTask();
     }
 }

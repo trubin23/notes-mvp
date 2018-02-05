@@ -1,5 +1,7 @@
 package com.example.trubin23.tasks_mvp.taskdetail;
 
+import android.support.annotation.NonNull;
+
 import com.example.trubin23.tasks_mvp.BasePresenter;
 import com.example.trubin23.tasks_mvp.BaseView;
 import com.example.trubin23.tasks_mvp.data.Task;
@@ -12,7 +14,11 @@ public interface TaskDetailContract {
 
     interface View extends BaseView<Presenter> {
 
-        void showTask(Task task);
+        void setTitle(@NonNull String title);
+
+        void setDescription(@NonNull String description);
+
+        void setDateOfCreate(@NonNull String dateOfCreate);
 
         void showMissingTask();
     }

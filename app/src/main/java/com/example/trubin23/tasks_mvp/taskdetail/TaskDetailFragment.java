@@ -53,10 +53,18 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     }
 
     @Override
-    public void showTask(Task task) {
-        mDetailTitle.setText(task.getTitle());
-        mDetailDescription.setText(task.getDescription());
-        mDetailDateOfCreate.setText(task.getDateOfCreation());
+    public void setTitle(@NonNull String title) {
+        mDetailTitle.setText(title);
+    }
+
+    @Override
+    public void setDescription(@NonNull String description) {
+        mDetailDescription.setText(description);
+    }
+
+    @Override
+    public void setDateOfCreate(@NonNull String dateOfCreate) {
+        mDetailDateOfCreate.setText(dateOfCreate);
     }
 
     @Override

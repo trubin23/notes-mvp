@@ -3,4 +3,5 @@
     <string name="no_data">No data</string>
     <string name="title_hint">Title</string>
     <string name="description_hint">Enter your task here.</string>
+    <string name="empty_task_message">Task cannot be empty</string>
 </resources>

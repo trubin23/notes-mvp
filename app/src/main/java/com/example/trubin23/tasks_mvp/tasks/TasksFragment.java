@@ -79,7 +79,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     }
 
     @Override
-    public void showTask(@NonNull List<Task> tasks) {
+    public void showTasks(@NonNull List<Task> tasks) {
         mTasksAdapter.setTasks(tasks);
+    }
+
+    @Override
+    public void showAddTask() {
+
     }
 }

@@ -50,7 +50,17 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
     }
 
     @Override
+    public void setTitle(@NonNull String title) {
+        mTitle.setText(title);
+    }
+
+    @Override
+    public void setDescription(@NonNull String description) {
+        mDescription.setText(description);
+    }
+
+    @Override
     public void showEmptyTaskError() {
-        Snackbar.make(mTitle, "Task cannot be empty", Snackbar.LENGTH_LONG).show();
+        Snackbar.make(mTitle, R.string.empty_task_message, Snackbar.LENGTH_LONG).show();
     }
 }
