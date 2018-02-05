@@ -11,6 +11,7 @@ public interface AddEditTaskContract {
 
     interface View extends BaseView<Presenter>{
 
+        void showEmptyTaskError();
     }
 
     interface Presenter extends BasePresenter {
