@@ -14,14 +14,12 @@ import com.example.trubin23.tasks_mvp.util.Injection;
 
 public class TaskDetailActivity extends AppCompatActivity {
 
-    public static final String EXTRA_TASK_ID = "TASK_ID";
+    public static final String SHOW_TASK_ID = "TASK_ID";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskdetail_act);
-
-        String taskId = getIntent().getStringExtra(EXTRA_TASK_ID);
 
         TaskDetailFragment taskDetailFragment =
                 (TaskDetailFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
@@ -31,9 +29,11 @@ public class TaskDetailActivity extends AppCompatActivity {
                     getSupportFragmentManager(), taskDetailFragment, R.id.contentFrame);
         }
 
+        String taskId = getIntent().getStringExtra(SHOW_TASK_ID);
+
         new TaskDetailPresenter(
-                taskId,
                 Injection.provideTasksRepository(getApplicationContext()),
-                taskDetailFragment);
+                taskDetailFragment,
+                taskId);
     }
 }

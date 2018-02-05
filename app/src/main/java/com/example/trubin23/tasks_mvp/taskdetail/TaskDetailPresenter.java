@@ -19,14 +19,15 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
 
     private String mTaskId;
 
-    public TaskDetailPresenter(@Nullable String taskId,
-                               @NonNull TasksRepository tasksRepository,
-                               @NonNull TaskDetailContract.View taskDetailView) {
-        mTaskId = taskId;
+    TaskDetailPresenter(@NonNull TasksRepository tasksRepository,
+                        @NonNull TaskDetailContract.View taskDetailView,
+                        @Nullable String taskId) {
         mTasksRepository = tasksRepository;
         mTaskDetailView = taskDetailView;
 
         mTaskDetailView.setPresenter(this);
+
+        mTaskId = taskId;
     }
 
     @Override
@@ -35,6 +36,11 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
     }
 
     private void openTask() {
+        if (mTaskId == null || mTaskId.isEmpty()) {
+            mTaskDetailView.showMissingTask();
+            return;
+        }
+
         mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {

@@ -69,7 +69,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     private void showTaskDetail(String id) {
         Intent intent = new Intent(getContext(), TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.EXTRA_TASK_ID, id);
+        intent.putExtra(TaskDetailActivity.SHOW_TASK_ID, id);
         startActivity(intent);
     }
 
