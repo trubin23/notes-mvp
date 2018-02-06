@@ -1,7 +1,7 @@
 package com.example.trubin23.tasks_mvp.addedittask;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 
 import com.example.trubin23.tasks_mvp.R;
 import com.example.trubin23.tasks_mvp.util.ActivityUtils;

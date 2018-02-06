@@ -1,7 +1,9 @@
 package com.example.trubin23.tasks_mvp.tasks;
 
+import android.app.Activity;
 import android.support.annotation.NonNull;
 
+import com.example.trubin23.tasks_mvp.addedittask.AddEditTaskActivity;
 import com.example.trubin23.tasks_mvp.data.Task;
 import com.example.trubin23.tasks_mvp.data.source.TasksDataSource;
 import com.example.trubin23.tasks_mvp.data.source.TasksRepository;
@@ -46,5 +48,13 @@ public class TasksPresenter implements TasksContract.Presenter {
                 mTasksView.setLoadingIndicator(false);
             }
         });
+    }
+
+    @Override
+    public void activityResult(int requestCode, int resultCode) {
+        if (AddEditTaskActivity.REQUEST_ADD_TASK == requestCode
+                && Activity.RESULT_OK == resultCode) {
+            mTasksView.showSuccessfullySavedMessage();
+        }
     }
 }

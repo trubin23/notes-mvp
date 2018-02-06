@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -72,12 +73,6 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mPresenter = presenter;
     }
 
-    private void showTaskDetail(String taskId) {
-        Intent intent = new Intent(getContext(), TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.SHOW_TASK_ID, taskId);
-        startActivity(intent);
-    }
-
     @Override
     public void setLoadingIndicator(boolean active) {
         mSwipeRefreshLayout.post(() -> mSwipeRefreshLayout.setRefreshing(active));
@@ -88,6 +83,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mTasksAdapter.setTasks(tasks);
     }
 
+    private void showTaskDetail(@NonNull String taskId) {
+        Intent intent = new Intent(getContext(), TaskDetailActivity.class);
+        intent.putExtra(TaskDetailActivity.SHOW_TASK_ID, taskId);
+        startActivity(intent);
+    }
+
     private void showAddTask() {
         Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
         startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
@@ -95,6 +96,12 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPresenter.activityResult(requestCode, resultCode);
+    }
 
+    @Override
+    public void showSuccessfullySavedMessage() {
+        Snackbar.make(getView(), R.string.successfully_saved_task_message,
+                Snackbar.LENGTH_LONG).show();
     }
 }

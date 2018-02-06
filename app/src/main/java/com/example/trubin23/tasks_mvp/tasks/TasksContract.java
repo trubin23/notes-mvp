@@ -19,9 +19,12 @@ public interface TasksContract {
         void setLoadingIndicator(boolean active);
 
         void showTasks(@NonNull List<Task> tasks);
+
+        void showSuccessfullySavedMessage();
     }
 
     interface Presenter extends BasePresenter {
 
+        void activityResult(int requestCode, int resultCode);
     }
 }

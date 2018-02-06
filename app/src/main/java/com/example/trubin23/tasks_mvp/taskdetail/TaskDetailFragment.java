@@ -1,16 +1,19 @@
 package com.example.trubin23.tasks_mvp.taskdetail;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.trubin23.tasks_mvp.R;
-import com.example.trubin23.tasks_mvp.data.Task;
+import com.example.trubin23.tasks_mvp.addedittask.AddEditTaskActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,6 +40,9 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
         ButterKnife.bind(this, root);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab_edit_task);
+        fab.setOnClickListener(v -> mPresenter.editTask());
 
         return root;
     }
@@ -72,5 +78,25 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         mDetailTitle.setText("");
         mDetailDescription.setText(getString(R.string.no_data));
         mDetailDateOfCreate.setText("");
+    }
+
+    @Override
+    public void showEditTask(@NonNull String taskId) {
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        intent.putExtra(AddEditTaskActivity.EDIT_TASK_ID, taskId);
+        startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        mPresenter.activityResult(requestCode, resultCode);
+    }
+
+    @Override
+    public void activityFinish() {
+        FragmentActivity activity = getActivity();
+        if (activity != null) {
+            activity.finish();
+        }
     }
 }
