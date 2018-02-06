@@ -1,6 +1,6 @@
 package com.example.trubin23.tasks_mvp.tasks.tasklist;
 
-import com.example.trubin23.tasks_mvp.data.Task;
+import android.support.annotation.NonNull;
 
 /**
  * Created by Andrey on 03.02.2018.
@@ -8,5 +8,5 @@ import com.example.trubin23.tasks_mvp.data.Task;
 
 public interface TaskItemListener {
 
-    void onTaskClick(Task clickedTask);
+    void onTaskClick(@NonNull String taskId);
 }

@@ -9,6 +9,8 @@ import com.example.trubin23.tasks_mvp.util.Injection;
 
 public class AddEditTaskActivity extends AppCompatActivity {
 
+    public static final int REQUEST_ADD_TASK = 1;
+
     public static final String EDIT_TASK_ID = "EDIT_TASK_ID";
 
     @Override

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.RecyclerView;
@@ -12,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.trubin23.tasks_mvp.R;
+import com.example.trubin23.tasks_mvp.addedittask.AddEditTaskActivity;
 import com.example.trubin23.tasks_mvp.data.Task;
 import com.example.trubin23.tasks_mvp.taskdetail.TaskDetailActivity;
 import com.example.trubin23.tasks_mvp.tasks.tasklist.TaskItemListener;
@@ -39,7 +41,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        TaskItemListener taskItemListener = clickedTask -> showTaskDetail(clickedTask.getId());
+        TaskItemListener taskItemListener = this::showTaskDetail;
         mTasksAdapter = new TasksAdapter(taskItemListener);
     }
 
@@ -52,6 +54,9 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setAdapter(mTasksAdapter);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab_add_task);
+        fab.setOnClickListener(v -> showAddTask());
 
         return root;
     }
@@ -67,9 +72,9 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mPresenter = presenter;
     }
 
-    private void showTaskDetail(String id) {
+    private void showTaskDetail(String taskId) {
         Intent intent = new Intent(getContext(), TaskDetailActivity.class);
-        intent.putExtra(TaskDetailActivity.SHOW_TASK_ID, id);
+        intent.putExtra(TaskDetailActivity.SHOW_TASK_ID, taskId);
         startActivity(intent);
     }
 
@@ -83,8 +88,13 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         mTasksAdapter.setTasks(tasks);
     }
 
+    private void showAddTask() {
+        Intent intent = new Intent(getContext(), AddEditTaskActivity.class);
+        startActivityForResult(intent, AddEditTaskActivity.REQUEST_ADD_TASK);
+    }
+
     @Override
-    public void showAddTask() {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
 
     }
 }
