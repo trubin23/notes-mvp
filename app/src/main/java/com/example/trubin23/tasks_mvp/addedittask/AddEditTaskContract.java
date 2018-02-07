@@ -22,5 +22,6 @@ public interface AddEditTaskContract {
 
     interface Presenter extends BasePresenter {
 
+        void saveTask(@NonNull String title, @NonNull String description);
     }
 }

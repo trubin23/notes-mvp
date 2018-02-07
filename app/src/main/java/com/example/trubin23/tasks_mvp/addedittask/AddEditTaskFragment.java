@@ -3,6 +3,7 @@ package com.example.trubin23.tasks_mvp.addedittask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -31,9 +32,14 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
         ButterKnife.bind(this, root);
+
+        FloatingActionButton fab = root.findViewById(R.id.fab_edit_task_done);
+        fab.setOnClickListener(v -> mPresenter.saveTask(
+                mTitle.getText().toString(), mDescription.getText().toString()));
 
         return root;
     }

@@ -41,7 +41,7 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
         return mTaskId == null;
     }
 
-    private void populateTask(){
+    private void populateTask() {
         mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {
@@ -54,5 +54,11 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
                 mAddTaskView.showEmptyTaskError();
             }
         });
+    }
+
+    @Override
+    public void saveTask(@NonNull String title, @NonNull String description) {
+        Task task = new Task(title, description);
+        mTasksRepository.saveTask(task);
     }
 }
