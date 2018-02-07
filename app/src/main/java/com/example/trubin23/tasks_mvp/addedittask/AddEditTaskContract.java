@@ -18,6 +18,8 @@ public interface AddEditTaskContract {
         void setDescription(@NonNull String description);
 
         void showEmptyTaskError();
+
+        void showTasksList();
     }
 
     interface Presenter extends BasePresenter {

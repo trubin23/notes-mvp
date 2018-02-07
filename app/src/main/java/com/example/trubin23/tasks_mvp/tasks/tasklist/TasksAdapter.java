@@ -56,11 +56,11 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
     class TaskHolder extends RecyclerView.ViewHolder {
 
-        @BindView(R.id.task_detail_title)
+        @BindView(R.id.item_title)
         TextView mTitleTV;
 
-        @BindView(R.id.task_detail_description)
-        TextView mDescriptionTV;
+        @BindView(R.id.item_date)
+        TextView mDateTV;
 
         TaskHolder(View itemView) {
             super(itemView);
@@ -69,7 +69,7 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.TaskHolder> 
 
         void setTask(@NonNull Task task) {
             mTitleTV.setText(task.getTitle());
-            mDescriptionTV.setText(task.getDescription());
+            mDateTV.setText(task.getDateOfCreation());
         }
     }
 }

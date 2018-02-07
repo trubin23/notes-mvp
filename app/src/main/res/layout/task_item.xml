@@ -7,12 +7,12 @@
         android:id="@+id/item_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toStartOf="@id/task_detail_date"
+        android:layout_toStartOf="@id/item_date"
         android:ellipsize="end"
         android:maxLines="1" />
 
     <TextView
-        android:id="@+id/task_detail_date"
+        android:id="@+id/item_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true" />

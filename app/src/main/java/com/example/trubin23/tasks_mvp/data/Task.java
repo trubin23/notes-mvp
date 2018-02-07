@@ -26,7 +26,7 @@ public final class Task {
 
     @Ignore
     private static final DateFormat sDateFormat =
-            new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+            new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
 
     @PrimaryKey
     @NonNull

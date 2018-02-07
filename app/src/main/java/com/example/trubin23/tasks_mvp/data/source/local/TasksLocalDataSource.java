@@ -46,7 +46,7 @@ public class TasksLocalDataSource implements TasksDataSource {
     @Override
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
         Task task = mTasksDao.getTaskById(id);
-        if (task != null){
+        if (task == null){
             callback.onDataNotAvailable();
         } else {
             callback.onTaskLoaded(task);

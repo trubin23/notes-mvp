@@ -46,7 +46,7 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
         mTasksRepository.getTask(mTaskId, new TasksDataSource.GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {
-                if (null == task) {
+                if (task == null) {
                     mTaskDetailView.showMissingTask();
                 } else {
                     mTaskDetailView.setTitle(task.getTitle());
