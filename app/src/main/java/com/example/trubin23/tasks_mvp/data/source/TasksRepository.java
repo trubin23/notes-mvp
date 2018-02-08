@@ -77,4 +77,9 @@ public class TasksRepository implements TasksDataSource {
     public void updateTask(@NonNull Task task) {
         mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.updateTask(task));
     }
+
+    @Override
+    public void deleteTask(@NonNull String id) {
+        mAppExecutors.getNetworkIO().execute(() -> mTasksLocalDataSource.deleteTask(id));
+    }
 }

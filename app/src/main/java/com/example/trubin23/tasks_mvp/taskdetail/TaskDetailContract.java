@@ -31,5 +31,7 @@ public interface TaskDetailContract {
         void editTask();
 
         void activityResult(int requestCode, int resultCode);
+
+        void deleteTask();
     }
 }

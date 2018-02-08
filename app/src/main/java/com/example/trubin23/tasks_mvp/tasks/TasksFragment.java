@@ -55,6 +55,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
         ButterKnife.bind(this, root);
 
+        mSwipeRefreshLayout.setEnabled(false);
+
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);
@@ -108,7 +110,10 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
     @Override
     public void showSuccessfullySavedMessage() {
-        Snackbar.make(getView(), R.string.successfully_saved_task_message,
-                Snackbar.LENGTH_LONG).show();
+        View view = getView();
+        if (view!=null) {
+            Snackbar.make(view, R.string.successfully_saved_task_message,
+                    Snackbar.LENGTH_LONG).show();
+        }
     }
 }

@@ -76,4 +76,9 @@ public class TaskDetailPresenter implements TaskDetailContract.Presenter {
             mTaskDetailView.activityFinish();
         }
     }
+
+    @Override
+    public void deleteTask() {
+        mTasksRepository.deleteTask(mTaskId);
+    }
 }

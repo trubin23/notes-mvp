@@ -62,4 +62,9 @@ public class TasksLocalDataSource implements TasksDataSource {
     public void updateTask(@NonNull Task task) {
         mTasksDao.updateTask(task);
     }
+
+    @Override
+    public void deleteTask(@NonNull String id) {
+        mTasksDao.deleteTaskById(id);
+    }
 }
