@@ -41,7 +41,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
         ButterKnife.bind(this, root);
 
-        FloatingActionButton fab = root.findViewById(R.id.fab_edit_task);
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
         fab.setOnClickListener(v -> mPresenter.editTask());
 
         return root;

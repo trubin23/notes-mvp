@@ -38,7 +38,7 @@ public class AddEditTaskFragment extends Fragment implements AddEditTaskContract
         View root = inflater.inflate(R.layout.addtask_frag, container, false);
         ButterKnife.bind(this, root);
 
-        FloatingActionButton fab = root.findViewById(R.id.fab_edit_task_done);
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task_done);
         fab.setOnClickListener(v -> mPresenter.saveTask(
                 mTitle.getText().toString(), mDescription.getText().toString()));
 

@@ -63,7 +63,7 @@ public class TasksFragment extends Fragment implements TasksContract.View {
                 recyclerView.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
 
-        FloatingActionButton fab = root.findViewById(R.id.fab_add_task);
+        FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
         fab.setOnClickListener(v -> showAddTask());
 
         return root;
