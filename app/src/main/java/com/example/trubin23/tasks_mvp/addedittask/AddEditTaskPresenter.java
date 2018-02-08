@@ -72,9 +72,8 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
     }
 
     private void updateTask(@NonNull String title, @NonNull String description) {
-        //TODO: create to update Task with exist ID
-        //Task task = new Task(title, description);
-        //mTasksRepository.saveTask(task);
-        //mAddTaskView.showTasksList();
+        Task task = new Task(title, description, mTaskId);
+        mTasksRepository.saveTask(task);
+        mAddTaskView.showTasksList();
     }
 }

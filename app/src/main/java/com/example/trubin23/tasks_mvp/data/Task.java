@@ -35,18 +35,18 @@ public final class Task {
 
     @NonNull
     @ColumnInfo(name = "title")
-    private String mTitle;
+    private final String mTitle;
 
     @NonNull
     @ColumnInfo(name = "description")
-    private String mDescription;
+    private final String mDescription;
 
     @NonNull
     @ColumnInfo(name = "date-of-creation")
-    private String mDateOfCreation;
+    private final String mDateOfCreation;
 
-    public Task(@NonNull String id, @NonNull String title, @NonNull String description,
-                @Nullable String dateOfCreation) {
+    public Task(@NonNull String title, @NonNull String description,
+                @NonNull String id, @Nullable String dateOfCreation) {
         mId = id;
         mTitle = title;
         mDescription = description;
@@ -59,7 +59,12 @@ public final class Task {
 
     @Ignore
     public Task(@NonNull String title, @NonNull String description) {
-        this(UUID.randomUUID().toString(), title, description, null);
+        this(title, description, UUID.randomUUID().toString(), null);
+    }
+
+    @Ignore
+    public Task(@NonNull String title, @NonNull String description, @NonNull String id) {
+        this(title, description, id, null);
     }
 
     @NonNull
