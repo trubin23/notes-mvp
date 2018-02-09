@@ -23,8 +23,6 @@ public class TaskDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.taskdetail_act);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -45,5 +43,11 @@ public class TaskDetailActivity extends AppCompatActivity {
                 Injection.provideTasksRepository(getApplicationContext()),
                 taskDetailFragment,
                 taskId);
+    }
+
+    @Override
+    public boolean onNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

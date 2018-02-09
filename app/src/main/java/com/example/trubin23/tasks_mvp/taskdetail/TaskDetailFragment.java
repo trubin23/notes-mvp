@@ -44,6 +44,8 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         View root = inflater.inflate(R.layout.taskdetail_frag, container, false);
         ButterKnife.bind(this, root);
 
+        setHasOptionsMenu(true);
+
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_edit_task);
         fab.setOnClickListener(v -> mPresenter.editTask());
 
@@ -63,7 +65,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case R.id.menu_delete:
                 mPresenter.deleteTask();
                 return true;
