@@ -66,6 +66,7 @@ public class TaskDetailFragment extends Fragment implements TaskDetailContract.V
         switch (item.getItemId()){
             case R.id.menu_delete:
                 mPresenter.deleteTask();
+                return true;
         }
         return false;
     }
