@@ -20,6 +20,8 @@ public class TasksRepository implements TasksDataSource {
 
     private AppExecutors mAppExecutors;
 
+    private final TasksDataSource mTasksRemoteDataSource;
+
     private final TasksDataSource mTasksLocalDataSource;
 
     private Map<String, Task> mCachedTasks;
@@ -27,16 +29,20 @@ public class TasksRepository implements TasksDataSource {
     private boolean mCacheIsDirty = false;
 
     private TasksRepository(@NonNull AppExecutors appExecutors,
+                            @NonNull TasksDataSource tasksRemoteDataSource,
                             @NonNull TasksDataSource tasksLocalDataSource) {
         mAppExecutors = appExecutors;
+        mTasksRemoteDataSource = tasksRemoteDataSource;
         mTasksLocalDataSource = tasksLocalDataSource;
     }
 
     @NonNull
     public static TasksRepository getInstance(@NonNull AppExecutors appExecutors,
+                                              @NonNull TasksDataSource tasksRemoteDataSource,
                                               @NonNull TasksDataSource tasksLocalDataSource) {
         if (INSTANCE == null) {
-            INSTANCE = new TasksRepository(appExecutors, tasksLocalDataSource);
+            INSTANCE = new TasksRepository(appExecutors,
+                    tasksRemoteDataSource, tasksLocalDataSource);
         }
         return INSTANCE;
     }
