@@ -46,7 +46,7 @@ public class TaskDetailActivity extends AppCompatActivity {
     }
 
     @Override
-    public boolean onNavigateUp() {
+    public boolean onSupportNavigateUp() {
         onBackPressed();
         return true;
     }

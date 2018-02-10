@@ -86,4 +86,9 @@ public final class Task {
     public String getDateOfCreation() {
         return mDateOfCreation;
     }
+
+    public boolean isEmpty(){
+        return (mTitle==null || mTitle.isEmpty()) &&
+                (mDescription==null || mDescription.isEmpty());
+    }
 }

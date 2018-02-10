@@ -67,8 +67,12 @@ public class AddEditTaskPresenter implements AddEditTaskContract.Presenter {
 
     private void createTask(@NonNull String title, @NonNull String description) {
         Task task = new Task(title, description);
-        mTasksRepository.saveTask(task);
-        mAddTaskView.showTasksList();
+        if (task.isEmpty()) {
+            mAddTaskView.showEmptyTaskError();
+        } else {
+            mTasksRepository.saveTask(task);
+            mAddTaskView.showTasksList();
+        }
     }
 
     private void updateTask(@NonNull String title, @NonNull String description) {
