@@ -1,6 +1,7 @@
 package com.example.trubin23.tasks_mvp.data.source;
 
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 
 import com.example.trubin23.tasks_mvp.data.Task;
 import com.example.trubin23.tasks_mvp.util.AppExecutors;
@@ -76,6 +77,13 @@ public class TasksRepository implements TasksDataSource {
 
     @Override
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
+        Task cachedTask = getTaskWithId(id);
+
+        if (cachedTask != null){
+            callback.onTaskLoaded(cachedTask);
+            return;
+        }
+
         Runnable runnable = () -> mTasksLocalDataSource.getTask(id, new GetTaskCallback() {
             @Override
             public void onTaskLoaded(Task task) {
@@ -134,6 +142,33 @@ public class TasksRepository implements TasksDataSource {
         mCacheIsDirty = false;
     }
 
-    private void refreshLocalDataSource(List<Task> tasks) {
+    private void refreshLocalDataSource(List<Task> refreshTasks) {
+        Runnable runnable = () -> mTasksLocalDataSource.getTasks(new LoadTasksCallback() {
+            @Override
+            public void onTasksLoaded(List<Task> tasks) {
+                for (Task task : tasks) {
+                    mTasksLocalDataSource.deleteTask(task.getId());
+                }
+                for (Task task : refreshTasks) {
+                    mTasksLocalDataSource.saveTask(task);
+                }
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+
+            }
+        });
+
+        mAppExecutors.getNetworkIO().execute(runnable);
+    }
+
+    @Nullable
+    private Task getTaskWithId(@NonNull String id) {
+        if (mCachedTasks == null || mCachedTasks.isEmpty()) {
+            return null;
+        } else {
+            return mCachedTasks.get(id);
+        }
     }
 }
