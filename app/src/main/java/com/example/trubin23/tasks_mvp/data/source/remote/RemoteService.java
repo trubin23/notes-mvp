@@ -25,11 +25,11 @@ public interface RemoteService {
     Call<Task> getTask(@Path("id") String id);
 
     @POST("/tasks")
-    void addTask(@Body Task task);
+    Call<Integer> addTask(@Body Task task);
 
     @PUT("/tasks/{id}")
-    void updateTask(@Path("id") String id, @Body Task task);
+    Call<Integer> updateTask(@Body Task task);
 
     @DELETE("tasks/{id}")
-    void deleteTask(@Path("id") String id);
+    Call<Integer> deleteTask(@Path("id") String id);
 }

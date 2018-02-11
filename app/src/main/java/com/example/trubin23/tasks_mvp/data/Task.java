@@ -9,12 +9,7 @@ import android.support.annotation.Nullable;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
-import java.util.TimeZone;
 import java.util.UUID;
 
 /**

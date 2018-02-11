@@ -11,6 +11,19 @@ import com.example.trubin23.tasks_mvp.data.source.TasksDataSource;
 
 public class TasksRemoteDataSource implements TasksDataSource {
 
+    private static TasksRemoteDataSource INSTANCE;
+
+    public static TasksRemoteDataSource getInstance() {
+        if (INSTANCE == null) {
+            synchronized (TasksRemoteDataSource.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new TasksRemoteDataSource();
+                }
+            }
+        }
+        return INSTANCE;
+    }
+
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
 
