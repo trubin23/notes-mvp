@@ -35,9 +35,9 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     private void loadTasks() {
-        if (!mFirstLoad) {
+        if (mFirstLoad) {
             mTasksRepository.refreshTasks();
-            mFirstLoad = true;
+            mFirstLoad = false;
         }
 
         mTasksView.setLoadingIndicator(true);

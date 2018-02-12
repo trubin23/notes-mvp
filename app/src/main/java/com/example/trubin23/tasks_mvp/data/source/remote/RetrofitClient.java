@@ -8,6 +8,7 @@ import java.util.List;
 
 import retrofit2.Callback;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by Andrey on 11.02.2018.
@@ -15,7 +16,7 @@ import retrofit2.Retrofit;
 
 class RetrofitClient {
 
-    private static final String BASE_URL = "https://trubin23.ru/api";
+    private static final String BASE_URL = "https://trubin23.ru";
 
     private static RemoteService sRemoteService = null;
 
@@ -24,6 +25,7 @@ class RetrofitClient {
         if (sRemoteService == null) {
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(BASE_URL)
+                    .addConverterFactory(GsonConverterFactory.create())
                     .build();
 
             sRemoteService = retrofit.create(RemoteService.class);
