@@ -111,11 +111,11 @@ public class TasksRepository implements TasksDataSource {
 
     @Override
     public void deleteTask(@NonNull String id) {
-        mAppExecutors.getNetworkIO().execute(() -> mTasksLocalDataSource.deleteTask(id));
+        mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.deleteTask(id));
     }
 
     private void getTasksFromRemoteDateSource(@NonNull LoadTasksCallback callback) {
-        mTasksRemoteDataSource.getTasks(new LoadTasksCallback() {
+        Runnable runnable = () -> mTasksRemoteDataSource.getTasks(new LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
                 refreshCache(tasks);
@@ -129,6 +129,8 @@ public class TasksRepository implements TasksDataSource {
                 mAppExecutors.getMainThread().execute(callback::onDataNotAvailable);
             }
         });
+
+        mAppExecutors.getNetworkIO().execute(runnable);
     }
 
     private void refreshCache(List<Task> tasks) {
@@ -160,7 +162,7 @@ public class TasksRepository implements TasksDataSource {
             }
         });
 
-        mAppExecutors.getNetworkIO().execute(runnable);
+        mAppExecutors.getDiskIO().execute(runnable);
     }
 
     @Nullable

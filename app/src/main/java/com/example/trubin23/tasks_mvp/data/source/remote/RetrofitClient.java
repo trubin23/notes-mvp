@@ -13,9 +13,9 @@ import retrofit2.Retrofit;
  * Created by Andrey on 11.02.2018.
  */
 
-public class RetrofitClient {
+class RetrofitClient {
 
-    private static final String BASE_URL = "http://localhost/rest/api";
+    private static final String BASE_URL = "https://trubin23.ru/api";
 
     private static RemoteService sRemoteService = null;
 
@@ -31,27 +31,27 @@ public class RetrofitClient {
         return sRemoteService;
     }
 
-    public static void getTasks(@NonNull Callback<List<Task>> callback) {
+    static void getTasks(@NonNull Callback<List<Task>> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.getTasks().enqueue(callback);
     }
 
-    public static void getTask(@NonNull String id, @NonNull Callback<Task> callback) {
+    static void getTask(@NonNull String id, @NonNull Callback<Task> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.getTask(id).enqueue(callback);
     }
 
-    public static void addTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
+    static void addTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.addTask(task).enqueue(callback);
     }
 
-    public static void updateTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
+    static void updateTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.updateTask(task).enqueue(callback);
     }
 
-    public static void deleteTask(@NonNull String id, @NonNull Callback<Integer> callback) {
+    static void deleteTask(@NonNull String id, @NonNull Callback<Integer> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.deleteTask(id).enqueue(callback);
     }
