@@ -79,7 +79,7 @@ public class TasksRepository implements TasksDataSource {
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
         Task cachedTask = getTaskWithId(id);
 
-        if (cachedTask != null){
+        if (cachedTask != null) {
             callback.onTaskLoaded(cachedTask);
             return;
         }
@@ -112,6 +112,10 @@ public class TasksRepository implements TasksDataSource {
     @Override
     public void deleteTask(@NonNull String id) {
         mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.deleteTask(id));
+    }
+
+    public void refreshTasks() {
+        mCacheIsDirty = true;
     }
 
     private void getTasksFromRemoteDateSource(@NonNull LoadTasksCallback callback) {

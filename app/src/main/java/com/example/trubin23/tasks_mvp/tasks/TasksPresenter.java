@@ -20,6 +20,8 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     private TasksContract.View mTasksView;
 
+    private boolean mFirstLoad = true;
+
     TasksPresenter(@NonNull TasksRepository tasksRepository, @NonNull TasksContract.View tasksView) {
         mTasksRepository = tasksRepository;
         mTasksView = tasksView;
@@ -33,6 +35,11 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     private void loadTasks() {
+        if (!mFirstLoad) {
+            mTasksRepository.refreshTasks();
+            mFirstLoad = true;
+        }
+
         mTasksView.setLoadingIndicator(true);
 
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
