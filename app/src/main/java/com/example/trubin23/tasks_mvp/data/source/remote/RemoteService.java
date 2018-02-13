@@ -1,7 +1,5 @@
 package com.example.trubin23.tasks_mvp.data.source.remote;
 
-import com.example.trubin23.tasks_mvp.data.Task;
-
 import java.util.List;
 
 import retrofit2.Call;

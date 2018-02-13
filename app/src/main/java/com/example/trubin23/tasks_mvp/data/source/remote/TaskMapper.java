@@ -4,10 +4,6 @@ import android.support.annotation.NonNull;
 
 import com.example.trubin23.tasks_mvp.data.Task;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,25 +11,25 @@ import java.util.List;
  * Created by Andrey on 13.02.2018.
  */
 
-@Mapper
-abstract class TaskMapper {
-
-    static final TaskMapper INSTANCE = Mappers.getMapper(TaskMapper.class);
+class TaskMapper {
 
     @NonNull
-    Task networkTaskToTask(@NonNull NetworkTask networkTask){
+    static Task networkTaskToTask(@NonNull NetworkTask networkTask) {
         return new Task(networkTask.getTitle(), networkTask.getDescription(),
                 networkTask.getId(), networkTask.getDateOfCreation());
     }
 
     @NonNull
-    abstract NetworkTask taskToNetworkTask(@NonNull Task task);
+    static NetworkTask taskToNetworkTask(@NonNull Task task) {
+        return new NetworkTask(task.getTitle(), task.getDescription(),
+                task.getId(), task.getDateOfCreation());
+    }
 
     @NonNull
-    List<Task> networkTaskListToTaskList(@NonNull List<NetworkTask> networkTasks){
+    static List<Task> networkTaskListToTaskList(@NonNull List<NetworkTask> networkTasks) {
         List<Task> tasks = new ArrayList<>();
 
-        for (NetworkTask networkTask : networkTasks){
+        for (NetworkTask networkTask : networkTasks) {
             Task task = networkTaskToTask(networkTask);
             tasks.add(task);
         }

@@ -1,5 +1,8 @@
 package com.example.trubin23.tasks_mvp.data.source.remote;
 
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -7,7 +10,7 @@ import com.google.gson.annotations.SerializedName;
  * Created by Andrey on 13.02.2018.
  */
 
-public class NetworkTask {
+class NetworkTask {
 
     @SerializedName("id")
     @Expose
@@ -25,35 +28,43 @@ public class NetworkTask {
     @Expose
     private String mDateOfCreation;
 
-    public String getId() {
+    NetworkTask(@NonNull String title, @NonNull String description,
+                @NonNull String id, @Nullable String dateOfCreation) {
+        mId = id;
+        mTitle = title;
+        mDescription = description;
+        mDateOfCreation = dateOfCreation;
+    }
+
+    String getId() {
         return mId;
     }
 
-    public void setId(String id) {
+    void setId(String id) {
         mId = id;
     }
 
-    public String getTitle() {
+    String getTitle() {
         return mTitle;
     }
 
-    public void setTitle(String title) {
+    void setTitle(String title) {
         mTitle = title;
     }
 
-    public String getDescription() {
+    String getDescription() {
         return mDescription;
     }
 
-    public void setDescription(String description) {
+    void setDescription(String description) {
         mDescription = description;
     }
 
-    public String getDateOfCreation() {
+    String getDateOfCreation() {
         return mDateOfCreation;
     }
 
-    public void setDateOfCreation(String dateOfCreation) {
+    void setDateOfCreation(String dateOfCreation) {
         mDateOfCreation = dateOfCreation;
     }
 

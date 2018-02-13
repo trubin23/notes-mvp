@@ -92,7 +92,7 @@ public class TasksRepository implements TasksDataSource {
 
             @Override
             public void onDataNotAvailable() {
-                mAppExecutors.getMainThread().execute(callback::onDataNotAvailable);
+                getTaskFromRemoteDateSource(id, callback);
             }
         });
 
@@ -101,17 +101,34 @@ public class TasksRepository implements TasksDataSource {
 
     @Override
     public void saveTask(@NonNull Task task) {
+        mAppExecutors.getNetworkIO().execute(()-> mTasksRemoteDataSource.saveTask(task));
         mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.saveTask(task));
+
+        if (mCachedTasks == null){
+            mCachedTasks = new LinkedHashMap<>();
+        }
+        mCachedTasks.put(task.getId(), task);
     }
 
     @Override
     public void updateTask(@NonNull Task task) {
+        mAppExecutors.getNetworkIO().execute(()-> mTasksRemoteDataSource.updateTask(task));
         mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.updateTask(task));
+
+        if (mCachedTasks == null){
+            mCachedTasks = new LinkedHashMap<>();
+        }
+        mCachedTasks.put(task.getId(), task);
     }
 
     @Override
     public void deleteTask(@NonNull String id) {
+        mAppExecutors.getNetworkIO().execute(()-> mTasksRemoteDataSource.deleteTask(id));
         mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.deleteTask(id));
+
+        if (mCachedTasks != null){
+            mCachedTasks.remove(id);
+        }
     }
 
     public void refreshTasks() {
@@ -152,17 +169,18 @@ public class TasksRepository implements TasksDataSource {
         Runnable runnable = () -> mTasksLocalDataSource.getTasks(new LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
-                for (Task task : tasks) {
-                    mTasksLocalDataSource.deleteTask(task.getId());
-                }
-                for (Task task : refreshTasks) {
-                    mTasksLocalDataSource.saveTask(task);
-                }
+                mAppExecutors.getDiskIO().execute(() -> {
+                    for (Task task : tasks) {
+                        mTasksLocalDataSource.deleteTask(task.getId());
+                    }
+                    for (Task task : refreshTasks) {
+                        mTasksLocalDataSource.saveTask(task);
+                    }
+                });
             }
 
             @Override
             public void onDataNotAvailable() {
-
             }
         });
 
@@ -176,5 +194,29 @@ public class TasksRepository implements TasksDataSource {
         } else {
             return mCachedTasks.get(id);
         }
+    }
+
+    private void getTaskFromRemoteDateSource(@NonNull String id,
+                                             @NonNull GetTaskCallback callback) {
+        Runnable runnable = () -> mTasksRemoteDataSource.getTask(id, new GetTaskCallback() {
+            @Override
+            public void onTaskLoaded(Task task) {
+                if (mCachedTasks == null) {
+                    mCachedTasks = new LinkedHashMap<>();
+                }
+                mCachedTasks.put(task.getId(), task);
+
+                mAppExecutors.getDiskIO().execute(() -> mTasksLocalDataSource.saveTask(task));
+
+                mAppExecutors.getMainThread().execute(() -> callback.onTaskLoaded(task));
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                mAppExecutors.getMainThread().execute(callback::onDataNotAvailable);
+            }
+        });
+
+        mAppExecutors.getNetworkIO().execute(runnable);
     }
 }

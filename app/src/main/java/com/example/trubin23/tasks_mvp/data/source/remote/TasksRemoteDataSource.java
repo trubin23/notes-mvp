@@ -34,10 +34,11 @@ public class TasksRemoteDataSource implements TasksDataSource {
     public void getTasks(@NonNull LoadTasksCallback callback) {
         RetrofitClient.getTasks(new Callback<List<NetworkTask>>() {
             @Override
-            public void onResponse(Call<List<NetworkTask>> call, Response<List<NetworkTask>> response) {
+            public void onResponse(Call<List<NetworkTask>> call,
+                                   Response<List<NetworkTask>> response) {
                 if (response.isSuccessful()) {
                     List<NetworkTask> networkTasks = response.body();
-                    List<Task> tasks = TaskMapper.INSTANCE.networkTaskListToTaskList(networkTasks);
+                    List<Task> tasks = TaskMapper.networkTaskListToTaskList(networkTasks);
                     callback.onTasksLoaded(tasks);
                 } else {
                     callback.onDataNotAvailable();
@@ -58,7 +59,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
             public void onResponse(Call<NetworkTask> call, Response<NetworkTask> response) {
                 if (response.isSuccessful()) {
                     NetworkTask networkTask = response.body();
-                    Task task = TaskMapper.INSTANCE.networkTaskToTask(networkTask);
+                    Task task = TaskMapper.networkTaskToTask(networkTask);
                     callback.onTaskLoaded(task);
                 } else {
                     callback.onDataNotAvailable();
@@ -74,7 +75,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void saveTask(@NonNull Task task) {
-        NetworkTask networkTask = TaskMapper.INSTANCE.taskToNetworkTask(task);
+        NetworkTask networkTask = TaskMapper.taskToNetworkTask(task);
 
         RetrofitClient.addTask(networkTask, new Callback<Integer>() {
             @Override
@@ -89,7 +90,7 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void updateTask(@NonNull Task task) {
-        NetworkTask networkTask = TaskMapper.INSTANCE.taskToNetworkTask(task);
+        NetworkTask networkTask = TaskMapper.taskToNetworkTask(task);
 
         RetrofitClient.updateTask(networkTask, new Callback<Integer>() {
             @Override

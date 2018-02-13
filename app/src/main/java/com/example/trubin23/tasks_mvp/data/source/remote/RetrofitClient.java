@@ -2,8 +2,6 @@ package com.example.trubin23.tasks_mvp.data.source.remote;
 
 import android.support.annotation.NonNull;
 
-import com.example.trubin23.tasks_mvp.data.Task;
-
 import java.util.List;
 
 import retrofit2.Callback;
