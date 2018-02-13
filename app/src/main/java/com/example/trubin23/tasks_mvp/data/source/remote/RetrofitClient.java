@@ -33,22 +33,22 @@ class RetrofitClient {
         return sRemoteService;
     }
 
-    static void getTasks(@NonNull Callback<List<Task>> callback) {
+    static void getTasks(@NonNull Callback<List<NetworkTask>> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.getTasks().enqueue(callback);
     }
 
-    static void getTask(@NonNull String id, @NonNull Callback<Task> callback) {
+    static void getTask(@NonNull String id, @NonNull Callback<NetworkTask> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.getTask(id).enqueue(callback);
     }
 
-    static void addTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
+    static void addTask(@NonNull NetworkTask task, @NonNull Callback<Integer> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.addTask(task).enqueue(callback);
     }
 
-    static void updateTask(@NonNull Task task, @NonNull Callback<Integer> callback) {
+    static void updateTask(@NonNull NetworkTask task, @NonNull Callback<Integer> callback) {
         RemoteService remoteService = getRemoteService();
         remoteService.updateTask(task).enqueue(callback);
     }

@@ -19,16 +19,16 @@ import retrofit2.http.Path;
 public interface RemoteService {
 
     @GET("/api/tasks")
-    Call<List<Task>> getTasks();
+    Call<List<NetworkTask>> getTasks();
 
     @GET("/api/tasks/{id}")
-    Call<Task> getTask(@Path("id") String id);
+    Call<NetworkTask> getTask(@Path("id") String id);
 
     @POST("/api/tasks")
-    Call<Integer> addTask(@Body Task task);
+    Call<Integer> addTask(@Body NetworkTask task);
 
     @PUT("/api/tasks/{id}")
-    Call<Integer> updateTask(@Body Task task);
+    Call<Integer> updateTask(@Body NetworkTask task);
 
     @DELETE("/api/tasks/{id}")
     Call<Integer> deleteTask(@Path("id") String id);

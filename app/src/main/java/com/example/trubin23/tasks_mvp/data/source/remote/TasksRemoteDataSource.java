@@ -32,18 +32,20 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
-        RetrofitClient.getTasks(new Callback<List<Task>>() {
+        RetrofitClient.getTasks(new Callback<List<NetworkTask>>() {
             @Override
-            public void onResponse(Call<List<Task>> call, Response<List<Task>> response) {
+            public void onResponse(Call<List<NetworkTask>> call, Response<List<NetworkTask>> response) {
                 if (response.isSuccessful()) {
-                    callback.onTasksLoaded(response.body());
+                    List<NetworkTask> networkTasks = response.body();
+                    List<Task> tasks = TaskMapper.INSTANCE.networkTaskListToTaskList(networkTasks);
+                    callback.onTasksLoaded(tasks);
                 } else {
                     callback.onDataNotAvailable();
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Task>> call, Throwable t) {
+            public void onFailure(Call<List<NetworkTask>> call, Throwable t) {
                 callback.onDataNotAvailable();
             }
         });
@@ -51,18 +53,20 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
-        RetrofitClient.getTask(id, new Callback<Task>() {
+        RetrofitClient.getTask(id, new Callback<NetworkTask>() {
             @Override
-            public void onResponse(Call<Task> call, Response<Task> response) {
+            public void onResponse(Call<NetworkTask> call, Response<NetworkTask> response) {
                 if (response.isSuccessful()) {
-                    callback.onTaskLoaded(response.body());
+                    NetworkTask networkTask = response.body();
+                    Task task = TaskMapper.INSTANCE.networkTaskToTask(networkTask);
+                    callback.onTaskLoaded(task);
                 } else {
                     callback.onDataNotAvailable();
                 }
             }
 
             @Override
-            public void onFailure(Call<Task> call, Throwable t) {
+            public void onFailure(Call<NetworkTask> call, Throwable t) {
                 callback.onDataNotAvailable();
             }
         });
@@ -70,7 +74,9 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void saveTask(@NonNull Task task) {
-        RetrofitClient.addTask(task, new Callback<Integer>() {
+        NetworkTask networkTask = TaskMapper.INSTANCE.taskToNetworkTask(task);
+
+        RetrofitClient.addTask(networkTask, new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
             }
@@ -83,7 +89,9 @@ public class TasksRemoteDataSource implements TasksDataSource {
 
     @Override
     public void updateTask(@NonNull Task task) {
-        RetrofitClient.updateTask(task, new Callback<Integer>() {
+        NetworkTask networkTask = TaskMapper.INSTANCE.taskToNetworkTask(task);
+
+        RetrofitClient.updateTask(networkTask, new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
             }
