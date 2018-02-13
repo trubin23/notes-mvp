@@ -26,7 +26,7 @@ public interface RemoteService {
     Call<Integer> addTask(@Body NetworkTask task);
 
     @PUT("/api/tasks/{id}")
-    Call<Integer> updateTask(@Body NetworkTask task);
+    Call<Integer> updateTask(@Path("id") String id, @Body NetworkTask task);
 
     @DELETE("/api/tasks/{id}")
     Call<Integer> deleteTask(@Path("id") String id);
