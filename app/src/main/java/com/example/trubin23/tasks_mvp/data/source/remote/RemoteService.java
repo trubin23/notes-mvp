@@ -14,7 +14,7 @@ import retrofit2.http.Path;
  * Created by Andrey on 10.02.2018.
  */
 
-public interface RemoteService {
+interface RemoteService {
 
     @GET("/api/tasks")
     Call<List<NetworkTask>> getTasks();
