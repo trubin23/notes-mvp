@@ -6,6 +6,8 @@ import com.example.trubin23.tasks_mvp.data.Task;
 import com.example.trubin23.tasks_mvp.data.source.TasksDataSource;
 
 import java.util.List;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -15,15 +17,24 @@ import retrofit2.Response;
  * Created by Andrey on 10.02.2018.
  */
 
-public class TasksRemoteDataSource implements TasksDataSource {
+public class TasksRemoteRepository implements TasksDataSource {
 
-    private static TasksRemoteDataSource INSTANCE;
+    private static TasksRemoteRepository INSTANCE;
 
-    public static TasksRemoteDataSource getInstance() {
+    private static final int THREAD_COUNT = 3;
+
+    private final Executor mNetworkIO;
+
+    private TasksRemoteRepository(@NonNull Executor networkIO) {
+        mNetworkIO = networkIO;
+    }
+
+    public static TasksRemoteRepository getInstance() {
         if (INSTANCE == null) {
-            synchronized (TasksRemoteDataSource.class) {
+            synchronized (TasksRemoteRepository.class) {
                 if (INSTANCE == null) {
-                    INSTANCE = new TasksRemoteDataSource();
+                    INSTANCE = new TasksRemoteRepository(
+                            Executors.newFixedThreadPool(THREAD_COUNT));
                 }
             }
         }

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.example.trubin23.tasks_mvp.data.Task;
+import com.example.trubin23.tasks_mvp.data.source.local.TasksLocalDataSource;
 import com.example.trubin23.tasks_mvp.util.AppExecutors;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class TasksRepository implements TasksDataSource {
 
     private final TasksDataSource mTasksRemoteDataSource;
 
-    private final TasksDataSource mTasksLocalDataSource;
+    private final TasksLocalDataSource mTasksLocalDataSource;
 
     private Map<String, Task> mCachedTasks;
 
@@ -31,7 +32,7 @@ public class TasksRepository implements TasksDataSource {
 
     private TasksRepository(@NonNull AppExecutors appExecutors,
                             @NonNull TasksDataSource tasksRemoteDataSource,
-                            @NonNull TasksDataSource tasksLocalDataSource) {
+                            @NonNull TasksLocalDataSource tasksLocalDataSource) {
         mAppExecutors = appExecutors;
         mTasksRemoteDataSource = tasksRemoteDataSource;
         mTasksLocalDataSource = tasksLocalDataSource;
@@ -40,7 +41,7 @@ public class TasksRepository implements TasksDataSource {
     @NonNull
     public static TasksRepository getInstance(@NonNull AppExecutors appExecutors,
                                               @NonNull TasksDataSource tasksRemoteDataSource,
-                                              @NonNull TasksDataSource tasksLocalDataSource) {
+                                              @NonNull TasksLocalDataSource tasksLocalDataSource) {
         if (INSTANCE == null) {
             INSTANCE = new TasksRepository(appExecutors,
                     tasksRemoteDataSource, tasksLocalDataSource);

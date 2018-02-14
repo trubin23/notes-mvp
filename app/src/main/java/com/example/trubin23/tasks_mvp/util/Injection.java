@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.example.trubin23.tasks_mvp.data.source.TasksRepository;
 import com.example.trubin23.tasks_mvp.data.source.local.TasksDatabase;
-import com.example.trubin23.tasks_mvp.data.source.local.TasksLocalDataSource;
-import com.example.trubin23.tasks_mvp.data.source.remote.TasksRemoteDataSource;
+import com.example.trubin23.tasks_mvp.data.source.local.TasksLocalRepository;
+import com.example.trubin23.tasks_mvp.data.source.remote.TasksRemoteRepository;
 
 /**
  * Created by Andrey on 01.02.2018.
@@ -19,7 +19,7 @@ public class Injection {
         TasksDatabase database = TasksDatabase.getInstance(context);
 
         return TasksRepository.getInstance(new AppExecutors(),
-                TasksRemoteDataSource.getInstance(),
-                TasksLocalDataSource.getInstance(database.taskDao()));
+                TasksRemoteRepository.getInstance(),
+                TasksLocalRepository.getInstance(database.taskDao()));
     }
 }
