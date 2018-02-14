@@ -18,7 +18,7 @@ public class Injection {
     public static TasksRepository provideTasksRepository(@NonNull Context context) {
         TasksDatabase database = TasksDatabase.getInstance(context);
 
-        return TasksRepository.getInstance(new AppExecutors(),
+        return TasksRepository.getInstance(
                 TasksRemoteRepository.getInstance(),
                 TasksLocalRepository.getInstance(database.taskDao()));
     }

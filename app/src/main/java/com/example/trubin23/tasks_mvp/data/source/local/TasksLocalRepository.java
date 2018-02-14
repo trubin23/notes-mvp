@@ -42,41 +42,45 @@ public class TasksLocalRepository implements TasksLocalDataSource {
 
     @Override
     public void getTasks(@NonNull LoadTasksCallback callback) {
-        List<Task> tasks = mTasksDao.getTasks();
-        if (tasks.isEmpty()) {
-            callback.onDataNotAvailable();
-        } else {
-            callback.onTasksLoaded(tasks);
-        }
+        mDiskIO.execute(() -> {
+            List<Task> tasks = mTasksDao.getTasks();
+            if (tasks.isEmpty()) {
+                callback.onDataNotAvailable();
+            } else {
+                callback.onTasksLoaded(tasks);
+            }
+        });
     }
 
     @Override
     public void getTask(@NonNull String id, @NonNull GetTaskCallback callback) {
-        Task task = mTasksDao.getTaskById(id);
-        if (task == null) {
-            callback.onDataNotAvailable();
-        } else {
-            callback.onTaskLoaded(task);
-        }
+        mDiskIO.execute(() -> {
+            Task task = mTasksDao.getTaskById(id);
+            if (task == null) {
+                callback.onDataNotAvailable();
+            } else {
+                callback.onTaskLoaded(task);
+            }
+        });
     }
 
     @Override
     public void saveTask(@NonNull Task task) {
-        mTasksDao.insertTask(task);
+        mDiskIO.execute(() -> mTasksDao.insertTask(task));
     }
 
     @Override
     public void updateTask(@NonNull Task task) {
-        mTasksDao.updateTask(task);
+        mDiskIO.execute(() -> mTasksDao.updateTask(task));
     }
 
     @Override
     public void deleteTask(@NonNull String id) {
-        mTasksDao.deleteTaskById(id);
+        mDiskIO.execute(() -> mTasksDao.deleteTaskById(id));
     }
 
     @Override
     public void deleteAllTasks() {
-        mTasksDao.deleteTasks();
+        mDiskIO.execute(() -> mTasksDao.deleteTasks());
     }
 }
