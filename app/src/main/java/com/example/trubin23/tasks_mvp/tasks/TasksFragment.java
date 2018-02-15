@@ -55,8 +55,6 @@ public class TasksFragment extends Fragment implements TasksContract.View {
         View root = inflater.inflate(R.layout.tasks_frag, container, false);
         ButterKnife.bind(this, root);
 
-        mSwipeRefreshLayout.setEnabled(false);
-
         RecyclerView recyclerView = root.findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mTasksAdapter);
@@ -67,6 +65,8 @@ public class TasksFragment extends Fragment implements TasksContract.View {
 
         FloatingActionButton fab = getActivity().findViewById(R.id.fab_add_task);
         fab.setOnClickListener(v -> showAddTask());
+
+        mSwipeRefreshLayout.setOnRefreshListener(() -> mPresenter.refreshTasks());
 
         return root;
     }

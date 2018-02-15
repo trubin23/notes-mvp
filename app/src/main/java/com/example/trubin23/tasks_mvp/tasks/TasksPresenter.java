@@ -20,7 +20,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
     private TasksContract.View mTasksView;
 
-    private boolean mFirstLoad = true;
+    private boolean mRefreshTasks = true;
 
     TasksPresenter(@NonNull TasksRepository tasksRepository, @NonNull TasksContract.View tasksView) {
         mTasksRepository = tasksRepository;
@@ -35,9 +35,9 @@ public class TasksPresenter implements TasksContract.Presenter {
     }
 
     private void loadTasks() {
-        if (mFirstLoad) {
+        if (mRefreshTasks) {
             mTasksRepository.refreshTasks();
-            mFirstLoad = false;
+            mRefreshTasks = false;
         }
 
         mTasksView.setLoadingIndicator(true);
@@ -62,5 +62,11 @@ public class TasksPresenter implements TasksContract.Presenter {
                 && Activity.RESULT_OK == resultCode) {
             mTasksView.showSuccessfullySavedMessage();
         }
+    }
+
+    @Override
+    public void refreshTasks() {
+        mRefreshTasks = true;
+        loadTasks();
     }
 }

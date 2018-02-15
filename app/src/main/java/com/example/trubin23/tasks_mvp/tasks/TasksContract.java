@@ -26,5 +26,7 @@ public interface TasksContract {
     interface Presenter extends BasePresenter {
 
         void activityResult(int requestCode, int resultCode);
+
+        void refreshTasks();
     }
 }

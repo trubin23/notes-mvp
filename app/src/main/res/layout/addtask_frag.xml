@@ -26,7 +26,8 @@
             android:layout_height="match_parent"
             android:gravity="top"
             android:hint="@string/description_hint"
-            android:minHeight="350dp" />
+            android:minHeight="350dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"  />
 
     </LinearLayout>
 
