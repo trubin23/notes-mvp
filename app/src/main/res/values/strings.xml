@@ -6,4 +6,6 @@
     <string name="empty_task_message">Task cannot be empty</string>
     <string name="successfully_saved_task_message">Task saved</string>
     <string name="menu_delete_task">Delete task</string>
+    <string name="task_list">Task list</string>
+    <string name="statistics">Statistics</string>
 </resources>
