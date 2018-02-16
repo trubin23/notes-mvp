@@ -1,22 +1,31 @@
 package com.example.trubin23.tasks_mvp.tasks;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.trubin23.tasks_mvp.R;
+import com.example.trubin23.tasks_mvp.statistics.StatisticsActivity;
 import com.example.trubin23.tasks_mvp.util.ActivityUtils;
 import com.example.trubin23.tasks_mvp.util.Injection;
 
 public class TasksActivity extends AppCompatActivity {
+
+    private DrawerLayout mDrawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.tasks_act);
 
-        DrawerLayout drawerLayout = findViewById(R.id.drawer_layout);
-        drawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
+        mDrawerLayout = findViewById(R.id.drawer_layout);
+        mDrawerLayout.setStatusBarBackground(R.color.colorPrimaryDark);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        if (navigationView != null){
+            setupDrawerContent(navigationView);
+        }
 
         TasksFragment tasksFragment =
                 (TasksFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
@@ -28,5 +37,27 @@ public class TasksActivity extends AppCompatActivity {
 
         new TasksPresenter(Injection.provideTasksRepository(getApplicationContext()),
                 tasksFragment);
+    }
+
+    private void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                item -> {
+                    switch (item.getItemId()) {
+                        case R.id.list_nav_menu_item:
+                            break;
+                        case R.id.statistics_nav_menu_item:
+                            Intent intent = new Intent(
+                                    TasksActivity.this, StatisticsActivity.class);
+                            startActivity(intent);
+                            break;
+                        default:
+                            break;
+                    }
+
+                    item.setChecked(true);
+                    mDrawerLayout.closeDrawers();
+                    return true;
+                }
+        );
     }
 }

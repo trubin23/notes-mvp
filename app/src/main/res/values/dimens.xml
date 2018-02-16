@@ -7,5 +7,9 @@
     <dimen name="activity_horizontal_padding">16dp</dimen>
     <dimen name="activity_vertical_padding">16dp</dimen>
 
+    <dimen name="nav_header_padding">16dp</dimen>
+
     <dimen name="nav_header_height">200dp</dimen>
+
+    <dimen name="nav_header_image_size">160dp</dimen>
 </resources>
