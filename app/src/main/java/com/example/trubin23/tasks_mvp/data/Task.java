@@ -8,6 +8,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -82,8 +83,25 @@ public final class Task {
         return mDateOfCreation;
     }
 
-    public boolean isEmpty(){
-        return (mTitle==null || mTitle.isEmpty()) &&
-                (mDescription==null || mDescription.isEmpty());
+    @Nullable
+    @Ignore
+    public Long dateOfCreationToLong() {
+        Date date = null;
+        try {
+            date = sDateFormat.parse(mDateOfCreation);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        if (date != null) {
+            return date.getTime();
+        } else {
+            return null;
+        }
+    }
+
+    public boolean isEmpty() {
+        return (mTitle == null || mTitle.isEmpty()) &&
+                (mDescription == null || mDescription.isEmpty());
     }
 }

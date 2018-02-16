@@ -8,4 +8,6 @@
     <string name="menu_delete_task">Delete task</string>
     <string name="task_list">Task list</string>
     <string name="statistics">Statistics</string>
+    <string name="loading">LOADING</string>
+    <string name="statistics_error">Error loading statistics.</string>
 </resources>
