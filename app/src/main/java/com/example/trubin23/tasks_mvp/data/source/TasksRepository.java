@@ -54,7 +54,7 @@ public class TasksRepository implements TasksDataSource {
         } else {
             mTasksLocalDataSource.getTasks(new LoadTasksCallback() {
                 @Override
-                public void onTasksLoaded(final List<Task> tasks) {
+                public void onTasksLoaded(@NonNull final List<Task> tasks) {
                     refreshCache(tasks);
                     callback.onTasksLoaded(tasks);
                 }
@@ -78,7 +78,7 @@ public class TasksRepository implements TasksDataSource {
 
         mTasksLocalDataSource.getTask(id, new GetTaskCallback() {
             @Override
-            public void onTaskLoaded(Task task) {
+            public void onTaskLoaded(@NonNull Task task) {
                 callback.onTaskLoaded(task);
             }
 
@@ -128,7 +128,7 @@ public class TasksRepository implements TasksDataSource {
     private void getTasksFromRemoteDateSource(@NonNull LoadTasksCallback callback) {
         mTasksRemoteDataSource.getTasks(new LoadTasksCallback() {
             @Override
-            public void onTasksLoaded(List<Task> tasks) {
+            public void onTasksLoaded(@NonNull List<Task> tasks) {
                 refreshCache(tasks);
                 refreshLocalDataSource(tasks);
                 callback.onTasksLoaded(new ArrayList<>(mCachedTasks.values()));
@@ -141,7 +141,7 @@ public class TasksRepository implements TasksDataSource {
         });
     }
 
-    private void refreshCache(List<Task> tasks) {
+    private void refreshCache(@NonNull List<Task> tasks) {
         if (mCachedTasks == null) {
             mCachedTasks = new LinkedHashMap<>();
         }
@@ -152,7 +152,7 @@ public class TasksRepository implements TasksDataSource {
         mCacheIsDirty = false;
     }
 
-    private void refreshLocalDataSource(List<Task> refreshTasks) {
+    private void refreshLocalDataSource(@NonNull List<Task> refreshTasks) {
         mTasksLocalDataSource.deleteAllTasks();
         for (Task task : refreshTasks) {
             mTasksLocalDataSource.saveTask(task);
@@ -172,7 +172,7 @@ public class TasksRepository implements TasksDataSource {
                                              @NonNull GetTaskCallback callback) {
         mTasksRemoteDataSource.getTask(id, new GetTaskCallback() {
             @Override
-            public void onTaskLoaded(Task task) {
+            public void onTaskLoaded(@NonNull Task task) {
                 if (mCachedTasks == null) {
                     mCachedTasks = new LinkedHashMap<>();
                 }

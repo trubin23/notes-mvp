@@ -14,14 +14,14 @@ public interface TasksDataSource {
 
     interface LoadTasksCallback{
 
-        void onTasksLoaded(List<Task> tasks);
+        void onTasksLoaded(@NonNull List<Task> tasks);
 
         void onDataNotAvailable();
     }
 
     interface GetTaskCallback{
 
-        void onTaskLoaded(Task task);
+        void onTaskLoaded(@NonNull Task task);
 
         void onDataNotAvailable();
     }

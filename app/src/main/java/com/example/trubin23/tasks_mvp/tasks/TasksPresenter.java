@@ -44,7 +44,7 @@ public class TasksPresenter implements TasksContract.Presenter {
 
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
-            public void onTasksLoaded(List<Task> tasks) {
+            public void onTasksLoaded(@NonNull List<Task> tasks) {
                 mTasksView.setLoadingIndicator(false);
                 mTasksView.showTasks(tasks);
             }
