@@ -37,10 +37,42 @@ public class StatisticsPresenter implements StatisticsContract.Presenter {
         mTasksRepository.getTasks(new TasksDataSource.LoadTasksCallback() {
             @Override
             public void onTasksLoaded(List<Task> tasks) {
-                //TODO: realize the function
-                //for (Task task : tasks){
-                //    task.dateOfCreationToLong();
-                //}
+                if (tasks.isEmpty()) {
+                    mStatisticsView.showLoadingIndicatorError();
+                    return;
+                }
+
+                Task mostOldTask = null, mostNewTask = null;
+                for (Task task : tasks) {
+                    Long currentTaskTime = task.dateOfCreationToLong();
+                    if (currentTaskTime == null) {
+                        continue;
+                    }
+
+                    if (mostOldTask == null) {
+                        mostOldTask = task;
+                    }
+                    if (mostNewTask == null) {
+                        mostNewTask = task;
+                    }
+
+                    Long oldTaskTime = mostOldTask.dateOfCreationToLong();
+                    Long newTaskTime = mostNewTask.dateOfCreationToLong();
+
+                    if (oldTaskTime != null && oldTaskTime > currentTaskTime) {
+                        mostOldTask = task;
+                    }
+                    if (newTaskTime != null && newTaskTime < currentTaskTime) {
+                        mostNewTask = task;
+                    }
+                }
+
+                if (mostOldTask == null) {
+                    mStatisticsView.showLoadingIndicatorError();
+                } else {
+                    mStatisticsView.showStatistics(mostOldTask.getDateOfCreation(),
+                            mostNewTask.getDateOfCreation());
+                }
             }
 
             @Override

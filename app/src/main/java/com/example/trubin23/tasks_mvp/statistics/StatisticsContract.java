@@ -17,7 +17,7 @@ public interface StatisticsContract {
 
         void showLoadingIndicatorError();
 
-        void showStatistics(@NonNull String text);
+        void showStatistics(@NonNull String mostOldTask, @NonNull String mostNewTask);
     }
 
     interface Presenter extends BasePresenter {

@@ -57,7 +57,9 @@ public class StatisticsFragment extends Fragment implements StatisticsContract.V
     }
 
     @Override
-    public void showStatistics(@NonNull String text) {
-        mStatisticsTV.setText(text);
+    public void showStatistics(@NonNull String mostOldTask, @NonNull String mostNewTask) {
+        mStatisticsTV.setText(String.format("%s %s\n%s %s",
+                getString(R.string.most_old_task), mostOldTask,
+                getString(R.string.most_new_task), mostNewTask));
     }
 }

@@ -10,4 +10,6 @@
     <string name="statistics">Statistics</string>
     <string name="loading">LOADING</string>
     <string name="statistics_error">Error loading statistics.</string>
+    <string name="most_old_task">Most old task:</string>
+    <string name="most_new_task">Most new task:</string>
 </resources>
